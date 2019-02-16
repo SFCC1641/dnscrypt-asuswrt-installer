@@ -277,7 +277,7 @@ inst_dnscrypt () {
     $RESOLVERS_URL_PREFIX/public-resolvers.md \
     $RESOLVERS_URL_PREFIX/public-resolvers.md.minisig
   chown nobody:nobody /jffs/dnscrypt/public-resolvers.md /jffs/dnscrypt/public-resolvers.md.minisig
-  tar xzv -C /jffs/dnscrypt/ -f /jffs/dnscrypt/dnscrypt-proxy-linux_arm-2.0.19.tar.gz
+  tar xzv -C /jffs/dnscrypt/ -f /tmp/dnscrypt-proxy-linux_arm-2.0.19.tar.gz
   if [ $? -ne 0 ]; then
     echo -e "$ERROR Unable to download dnscrypt-proxy package for your router"
     end_op_message
