@@ -276,14 +276,14 @@ inst_dnscrypt () {
   download_file $TARG_DIR 644 https://github.com/jedisct1/dnscrypt-proxy/releases/download/${DNSCRYPT_VER}/${DNSCRYPT_TAR} \
     $RESOLVERS_URL_PREFIX/public-resolvers.md \
     $RESOLVERS_URL_PREFIX/public-resolvers.md.minisig
-  chown nobody:nobody $TARG_DIR/public-resolvers.md $TARG_DIR/public-resolvers.md.minisig
+  chown nobody:nobody /jffs/public-resolvers.md /jffs/public-resolvers.md.minisig
   tar xzv -C $TARG_DIR -f $TARG_DIR/$DNSCRYPT_TAR
   if [ $? -ne 0 ]; then
     echo -e "$ERROR Unable to download dnscrypt-proxy package for your router"
     end_op_message
     return
   fi
-  chown `nvram get http_username`:root $TARG_DIR/$DNSCRYPT_ARCH_TAR/*
+  chown `nvram get http_username`:root /jffs/$DNSCRYPT_ARCH_TAR/*
   mv $TARG_DIR/$DNSCRYPT_ARCH_TAR/* $TARG_DIR
   rm -r $TARG_DIR/$DNSCRYPT_ARCH_TAR $TARG_DIR/$DNSCRYPT_TAR
   chmod 755 $TARG_DIR/dnscrypt-proxy
