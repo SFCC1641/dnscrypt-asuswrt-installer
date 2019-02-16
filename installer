@@ -9,7 +9,6 @@ ERROR="$BOLD *** Error: $NORM"
 WARNING="$BOLD * Warning: $NORM"
 INPUT="$BOLD => $NORM"
 
-
 _quote() {
   echo $1 | sed 's/[]\/()$*.^|[]/\\&/g'
 }
