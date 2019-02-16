@@ -235,14 +235,14 @@ download_file () {
   for URL in "$@"; do
     FILENAME="`basename $URL`"
     MD5SUM_OLD="`[ -f $TARG/$FILENAME ] && md5sum $TARG/$FILENAME | cut -d' ' -f1`"
-    MD5SUM_CURR="`/jffs/curl -L -k -s \"${URL}.md5sum\"`"
+    MD5SUM_CURR="`/tmp/curl -L -k -s \"${URL}.md5sum\"`"
     if [ `echo -n $MD5SUM_CURR | wc -c` -eq 32 ] && [ "$MD5SUM_CURR" ==  "$MD5SUM_OLD" ]; then
       echo -e "$INFO $FILENAME is up to date. Skipping..."
     else
       local COUNT=0
       while [ $COUNT -lt 3 ]; do
         echo -e "$INFO Downloading $FILENAME"
-        /jffs/curl -L -k -s "$URL" -o $TARG/$FILENAME
+        /tmp/curl -L -k -s "$URL" -o $TARG/$FILENAME
         if [ $? -eq 0 ]; then
           chmod $PERM $TARG/$FILENAME
           break
