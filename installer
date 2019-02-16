@@ -357,7 +357,6 @@ opendns_authen () {
 }
 
 inst_random () {
-  create_dir $TARG_DIR
 
   echo -e "$INFO Install a (P)RNG for better cryptographic operations"
   echo -e "$INFO Available random number generator providers:"
