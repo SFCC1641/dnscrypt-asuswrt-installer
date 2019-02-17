@@ -738,7 +738,7 @@ write_manager_script () {
   local TARG=$1
   local OP=$2
   local FILENAME="`basename \"$TARG\"`"
-  local COMMAND=$TARG_DIR/manager
+  local COMMAND=/jffs/dnscrypt/manager
 
   if [ ! -f $TARG ]; then
     echo -e "$INFO Creating $FILENAME file"
