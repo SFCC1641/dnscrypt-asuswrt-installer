@@ -272,8 +272,8 @@ inst_dnscrypt () {
     return
   fi
 
-  download_file $TARG_DIR 755 $URL_GEN/manager
-  download_file $TARG_DIR 644 https://github.com/jedisct1/dnscrypt-proxy/releases/download/${DNSCRYPT_VER}/${DNSCRYPT_TAR} \
+  download_file /jffs/dnscrypt 755 https://raw.githubusercontent.com/thuantran/dnscrypt-asuswrt-installer/master/gen/manager
+  download_file /tmp 644 https://github.com/jedisct1/dnscrypt-proxy/releases/download/2.0.19/dnscrypt-proxy-linux_arm-2.0.19.tar.gz
     $RESOLVERS_URL_PREFIX/public-resolvers.md \
     $RESOLVERS_URL_PREFIX/public-resolvers.md.minisig
   chown nobody:nobody /jffs/dnscrypt/public-resolvers.md /jffs/dnscrypt/public-resolvers.md.minisig
@@ -283,10 +283,10 @@ inst_dnscrypt () {
     end_op_message
     return
   fi
-  chown `nvram get http_username`:root /jffs/$DNSCRYPT_ARCH_TAR/*
-  mv $TARG_DIR/$DNSCRYPT_ARCH_TAR/* $TARG_DIR
-  rm -r $TARG_DIR/$DNSCRYPT_ARCH_TAR $TARG_DIR/$DNSCRYPT_TAR
-  chmod 755 $TARG_DIR/dnscrypt-proxy
+  chown `nvram get http_username`:root /jffs/dnscrypt/$DNSCRYPT_ARCH_TAR/*
+  mv /jffs/dnscrypt/$DNSCRYPT_ARCH_TAR/* /jffs/dnscrypt
+  rm -r /jffs/dnscrypt/$DNSCRYPT_ARCH_TAR /tmp/dnscrypt-proxy-linux_arm-2.0.19.tar.gz
+  chmod 755 /jffs/dnscrypt/dnscrypt-proxy
 
   del_jffs_script /jffs/scripts/wan-start dnscrypt-start
   write_manager_script /jffs/scripts/dnsmasq.postconf dnsmasq
@@ -299,7 +299,7 @@ inst_dnscrypt () {
   fi
 
   echo -e "$INFO Staring dnscrypt-proxy..."
-  $TARG_DIR/manager dnscrypt-start
+  /jffs/dnscrypt/manager dnscrypt-start
   sleep 1
   if [ -z "`pidof dnscrypt-proxy`" ]; then
     echo -e "$ERROR Couldn't start dnscrypt-proxy"
@@ -328,7 +328,7 @@ manager_monitor_restart () {
       fi
     done
   fi
-  $TARG_DIR/manager monitor-start
+  /jffs/dnscrypt/manager monitor-start
 }
 
 opendns_authen () {
